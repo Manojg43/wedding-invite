@@ -281,6 +281,11 @@
                                 <input type="text" class="form-control rounded-3" name="github_repo" value="wedding-invite">
                             </div>
                             <div class="mb-3">
+                                <label class="form-label fw-bold small">GitHub Branch</label>
+                                <input type="text" class="form-control rounded-3" name="github_branch" value="4.x" placeholder="e.g. 4.x or main">
+                                <div class="form-text small mt-1">Vercel is currently building from the <b>4.x</b> branch.</div>
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label fw-bold small">GitHub Personal Access Token (PAT)</label>
                                 <input type="password" class="form-control rounded-3 font-monospace" name="github_token" placeholder="ghp_xxxxxxxxxxxx">
                                 <div class="form-text small mt-2">
@@ -384,6 +389,7 @@
                 // Cloud Sync Fields
                 form.github_user.value = localStorage.getItem('github_user') || 'Manojg43';
                 form.github_repo.value = localStorage.getItem('github_repo') || 'wedding-invite';
+                form.github_branch.value = localStorage.getItem('github_branch') || '4.x';
                 form.github_token.value = localStorage.getItem('github_token') || '';
 
             } catch (e) {
@@ -523,7 +529,10 @@
             // Save settings locally
             localStorage.setItem('github_user', githubUser);
             localStorage.setItem('github_repo', githubRepo);
+            localStorage.setItem('github_branch', form.github_branch.value);
             localStorage.setItem('github_token', githubToken);
+
+            const githubBranch = form.github_branch.value || '4.x';
 
             const btn = document.getElementById('push-live');
             const originalText = btn.innerHTML;
@@ -534,8 +543,8 @@
                 const path = 'config.json';
                 const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${path}`;
                 
-                // 1. Get the current file version (SHA)
-                const getRes = await fetch(apiUrl, {
+                // 1. Get the current file version (SHA) from the specific branch
+                const getRes = await fetch(`${apiUrl}?ref=${githubBranch}`, {
                     headers: { 'Authorization': `token ${githubToken}` }
                 });
                 
@@ -555,7 +564,8 @@
                     body: JSON.stringify({
                         message: 'Update config.json via Live Dashboard',
                         content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
-                        sha: sha
+                        sha: sha,
+                        branch: githubBranch
                     })
                 });
 
