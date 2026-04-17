@@ -8,7 +8,7 @@ export const effects = (() => {
     let interval = null;
 
     const createParticle = (type = 'heart') => {
-        if (!container) return;
+        if (!container) {return;}
 
         const particle = document.createElement('div');
         particle.className = `particle particle-${type} sway-${Math.floor(Math.random() * 2) + 1}`;

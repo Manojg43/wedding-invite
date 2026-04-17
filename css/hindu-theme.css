@@ -215,6 +215,7 @@ hr {
     background-size: contain;
     pointer-events: none;
     z-index: -1;
+    display: none; /* Hidden for now per user request */
 }
 
 /* Due to CSS variable limitations in SVG backgrounds, we inject the colored SVG via pseudo-class per theme */

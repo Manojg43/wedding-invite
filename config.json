@@ -5,7 +5,7 @@
   },
   "home": {
     "title": "Wedding Invitation",
-    "couple": "Wahyu & Riski",
+    "couple": "Manojkumar & SIndhu",
     "date": "Wednesday, March 15, 2023",
     "bg_image": "./assets/images/gallery/bg.webp",
     "profile_image": "./assets/images/gallery/bg.webp"
@@ -64,20 +64,20 @@
     "display_date": "Wednesday, March 15, 2023",
     "target_date": "2024-01-01 09:30:00",
     "solemnization": {
-       "title": "Vivah Ceremony",
-       "time": "10.00 AM - Finished"
+      "title": "Vivah Ceremony",
+      "time": "10.00 AM - Finished"
     },
     "reception": {
-       "title": "Reception",
-       "time": "01.00 PM - Finished"
+      "title": "Reception",
+      "time": "01.00 PM - Finished"
     },
     "dress_code": {
-       "info": "For our shared comfort, we kindly request your presence with the following dress code:",
-       "type": "Traditional or Ethnic attire."
+      "info": "For our shared comfort, we kindly request your presence with the following dress code:",
+      "type": "Traditional or Ethnic attire."
     },
     "location": {
-       "address": "RT 10 RW 02, Pajerukan Village, Kalibagor District, Banyumas Regency, Central Java 53191.",
-       "maps_url": "https://goo.gl/maps/ALZR6FJZU3kxVwN86"
+      "address": "RT 10 RW 02, Pajerukan Village, Kalibagor District, Banyumas Regency, Central Java 53191.",
+      "maps_url": "https://goo.gl/maps/ALZR6FJZU3kxVwN86"
     }
   },
   "gallery": {
@@ -93,21 +93,44 @@
   },
   "celebration": {
     "title": "Help us Celebrate",
+    "travel_title": "Traveling from afar?",
     "items": [
       {
         "icon": "fa-music",
-        "title": "Song Requests",
-        "description": "Give us your song recommendations for the reception! Mention them in the Wishes section below."
+        "title": "Song Recommendations",
+        "description": "Give us your song recommendations for the Haldi! We will play them during the ceremony.",
+        "show_input": true,
+        "input_placeholder": "Type song name..."
       },
       {
         "icon": "fa-heart-pulse",
         "title": "Share Advice & Memories",
-        "description": "We'd love to hear your advice for a happy marriage or your favorite memory of us."
+        "description": "We'd love to hear your advice for a happy marriage or your favorite memory of us.",
+        "show_input": true,
+        "input_placeholder": "Share your thoughts..."
       },
       {
         "icon": "fa-map-location-dot",
-        "title": "Explore the City",
-        "description": "For our traveling guests, here are some of our favorite local spots to visit while you're in town."
+        "title": "Explore Nearby",
+        "description": "For our traveling guests, here are some of our favorite local spots to visit while you're in town.",
+        "show_input": false
+      }
+    ],
+    "travel_locations": [
+      {
+        "name": "Akkalkot Swami Samarth Maharaj Temple",
+        "image": "./assets/images/locations/akkalkot.png",
+        "maps_url": "https://goo.gl/maps/bKj9vExXjE6S8oJN7"
+      },
+      {
+        "name": "Pandharpur Vitthal Rukmini Mandir",
+        "image": "./assets/images/locations/pandharpur.png",
+        "maps_url": "https://goo.gl/maps/8fB9W6uR6uC6"
+      },
+      {
+        "name": "Tulja Bhavani Temple, Tuljapur",
+        "image": "https://picsum.photos/800/600?random=10",
+        "maps_url": "https://goo.gl/maps/TuljapurLink"
       }
     ]
   },
