@@ -258,12 +258,29 @@
                         <div class="tab-pane fade" id="tab-celebration" role="tabpanel">
                             <h5 class="fw-bold mb-4 border-bottom pb-2">Help us Celebrate Config</h5>
                             <div class="mb-3">
-                                <label class="form-label fw-bold small">Section Title</label>
+                                <label class="form-label fw-bold small">Main Section Title</label>
                                 <input type="text" class="form-control rounded-3" name="celebration_title" placeholder="Help us Celebrate">
                             </div>
-                            <h6 class="fw-bold mt-4 small border-bottom pb-1 text-secondary text-uppercase">Celebration Cards (JSON array format)</h6>
-                            <textarea class="form-control rounded-3 font-monospace small" name="celebration_items" rows="12"></textarea>
-                            <div class="form-text mt-2 small">Configure the icon, title, and description for each card in the celebration section.</div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small">Travel Section Title</label>
+                                <input type="text" class="form-control rounded-3" name="celebration_travel_title" placeholder="Traveling from afar?">
+                            </div>
+
+                            <h6 class="fw-bold mt-4 small border-bottom pb-1 text-secondary text-uppercase">Celebration Cards & Suggestion Inputs</h6>
+                            <div id="celebration-items-container" class="mb-3">
+                                <!-- Dynamic items here -->
+                            </div>
+                            <button type="button" class="btn btn-outline-secondary btn-sm rounded-4 mb-4" id="add-celebration-item">
+                                <i class="fa-solid fa-plus me-1"></i>Add Celebration Card
+                            </button>
+
+                            <h6 class="fw-bold mt-2 small border-bottom pb-1 text-secondary text-uppercase">Traveling Guests - Spiritual Spots</h6>
+                            <div id="travel-locations-container" class="mb-3">
+                                <!-- Dynamic locations here -->
+                            </div>
+                            <button type="button" class="btn btn-outline-secondary btn-sm rounded-4 mb-3" id="add-travel-location">
+                                <i class="fa-solid fa-plus me-1"></i>Add Travel Location
+                            </button>
                         </div>
 
                         <!-- Tab: Cloud Sync -->
@@ -368,8 +385,67 @@
                 form.story_video_url.value = data.story.video_url;
 
                 form.gallery_images.value = JSON.stringify(data.gallery.images, null, 2);
+                form.gallery_images.value = JSON.stringify(data.gallery.images, null, 2);
                 form.celebration_title.value = data.celebration?.title || 'Help us Celebrate';
-                form.celebration_items.value = JSON.stringify(data.celebration?.items || [], null, 2);
+                form.celebration_travel_title.value = data.celebration?.travel_title || 'Traveling from afar?';
+
+                // Render Celebration Items
+                const celebContainer = document.getElementById('celebration-items-container');
+                celebContainer.innerHTML = '';
+                (data.celebration?.items || []).forEach((item, index) => {
+                    const row = document.createElement('div');
+                    row.className = 'mb-3 p-3 bg-light rounded-4 shadow-sm position-relative';
+                    row.innerHTML = `
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <label class="small fw-bold">Title</label>
+                                <input type="text" class="form-control form-control-sm" name="celeb_title_${index}" value="${item.title}">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="small fw-bold">Icon (FA class)</label>
+                                <input type="text" class="form-control form-control-sm" name="celeb_icon_${index}" value="${item.icon}">
+                            </div>
+                            <div class="col-md-5">
+                                <label class="small fw-bold">Description</label>
+                                <input type="text" class="form-control form-control-sm" name="celeb_desc_${index}" value="${item.description}">
+                            </div>
+                        </div>
+                        <div class="mt-2 form-check form-switch small">
+                            <input class="form-check-input" type="checkbox" name="celeb_input_${index}" ${item.show_input ? 'checked' : ''}>
+                            <label class="form-check-label">Show Suggestion Input Box</label>
+                        </div>
+                        <input type="text" class="form-control form-control-sm mt-1" name="celeb_placeholder_${index}" value="${item.input_placeholder || ''}" placeholder="Input placeholder...">
+                    `;
+                    celebContainer.appendChild(row);
+                });
+                form.celeb_count = (data.celebration?.items || []).length;
+
+                // Render Travel Locations
+                const travelContainer = document.getElementById('travel-locations-container');
+                travelContainer.innerHTML = '';
+                (data.celebration?.travel_locations || []).forEach((loc, index) => {
+                    const row = document.createElement('div');
+                    row.className = 'mb-3 p-3 bg-light rounded-4 shadow-sm';
+                    row.innerHTML = `
+                        <div class="small fw-bold text-secondary mb-2">Location #${index + 1}</div>
+                        <div class="mb-2">
+                            <label class="small fw-bold">Name</label>
+                            <input type="text" class="form-control form-control-sm" name="travel_name_${index}" value="${loc.name}">
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Image Path/URL</label>
+                                <input type="text" class="form-control form-control-sm" name="travel_img_${index}" value="${loc.image}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Maps URL</label>
+                                <input type="text" class="form-control form-control-sm" name="travel_link_${index}" value="${loc.maps_url}">
+                            </div>
+                        </div>
+                    `;
+                    travelContainer.appendChild(row);
+                });
+                form.travel_count = (data.celebration?.travel_locations || []).length;
 
                 // Render story items
                 const storyContainer = document.getElementById('story-container');
@@ -399,89 +475,147 @@
 
         // Helper to collect all form data into the config object
         function collectData() {
-            const formData = new FormData(form);
-            const data = {
-                meta: { title: formData.get('meta_title'), description: formData.get('meta_title') },
-                home: {
-                    title: "Wedding Invitation",
-                    couple: formData.get('home_couple'),
-                    date: formData.get('home_date'),
-                    bg_image: formData.get('home_bg_image'),
-                    profile_image: formData.get('home_bg_image')
-                },
-                invitation: {
-                    opening_line: formData.get('invitation_opening_line'),
-                    greetings: formData.get('invitation_greetings'),
-                    intro: formData.get('invitation_intro'),
-                    groom: {
-                        name: formData.get('groom_name'),
-                        designation: formData.get('groom_designation'),
-                        father: formData.get('groom_father'),
-                        mother: formData.get('groom_mother'),
-                        photo: formData.get('groom_photo')
+            try {
+                const config = {
+                    meta: { title: form.meta_title.value, description: form.meta_title.value },
+                    home: {
+                        title: "Wedding Invitation",
+                        couple: form.home_couple.value,
+                        date: form.home_date.value,
+                        bg_image: form.home_bg_image.value,
+                        profile_image: form.home_bg_image.value
                     },
-                    bride: {
-                        name: formData.get('bride_name'),
-                        designation: formData.get('bride_designation'),
-                        father: formData.get('bride_father'),
-                        mother: formData.get('bride_mother'),
-                        photo: formData.get('bride_photo')
+                    invitation: {
+                        opening_line: form.invitation_opening_line.value,
+                        greetings: form.invitation_greetings.value,
+                        intro: form.invitation_intro.value,
+                        groom: {
+                            name: form.groom_name.value,
+                            designation: form.groom_designation.value,
+                            father: form.groom_father.value,
+                            mother: form.groom_mother.value,
+                            photo: form.groom_photo.value
+                        },
+                        bride: {
+                            name: form.bride_name.value,
+                            designation: form.bride_designation.value,
+                            father: form.bride_father.value,
+                            mother: form.bride_mother.value,
+                            photo: form.bride_photo.value
+                        }
+                    },
+                    verses: [
+                        { "text": "तुम्हारे बिना जीवन अधूरा है, जैसे बिना जल के कमल। अर्धनारीश्वर की तरह, हम एक हैं।", "reference": "— Hindu Wedding Blessing" },
+                        { "text": "सप्तपदी — सात फेरे, सात वचन, एक जीवन, एक साथ। ईश्वर की कृपा से बंधे दो आत्माएँ।", "reference": "— Saptapadi, The Seven Sacred Vows" }
+                    ],
+                    story: {
+                        title: "Our Love Story",
+                        button: "See Our Story",
+                        video_url: form.story_video_url.value,
+                        items: []
+                    },
+                    event: {
+                        title: "Shubh Vivah",
+                        info: "With the divine blessings of Lord Ganesh and Goddess Lakshmi, we warmly invite you to grace our auspicious occasion:",
+                        display_date: form.home_date.value,
+                        target_date: form.event_target_date.value,
+                        solemnization: { title: "Vivah Ceremony", time: form.event_solemnization_time.value },
+                        reception: { title: "Reception", time: form.event_reception_time.value },
+                        dress_code: { info: "For our shared comfort, we kindly request your presence with the following dress code:", type: "Traditional or Ethnic attire." },
+                        location: { address: form.event_location_address.value, maps_url: form.event_location_maps_url.value }
+                    },
+                    gallery: {
+                        title: "Gallery",
+                        images: JSON.parse(form.gallery_images.value || "[]")
+                    },
+                    celebration: {
+                        title: form.celebration_title.value,
+                        travel_title: form.celebration_travel_title.value,
+                        items: [],
+                        travel_locations: []
+                    },
+                    footer: {
+                        thanks: "Thank you for your love, blessings, and prayers. Your presence fills our hearts with joy.",
+                        closing: form.footer_closing.value
+                    },
+                    welcome: { title: "The Wedding Of", button: "Open Invitation" },
+                    audio_url: form.audio_url.value,
+                    effects: {
+                        enabled: form.effects_enabled.checked,
+                        type: form.effects_type.value,
+                        density: 1000
+                    },
+                    rsvp: {
+                        adults: parseInt(form.rsvp_adults.value || 0),
+                        children: parseInt(form.rsvp_children.value || 0),
+                        total: parseInt(form.rsvp_adults.value || 0) + parseInt(form.rsvp_children.value || 0)
                     }
-                },
-                verses: [
-                    { "text": "तुम्हारे बिना जीवन अधूरा है, जैसे बिना जल के कमल। अर्धनारीश्वर की तरह, हम एक हैं।", "reference": "— Hindu Wedding Blessing" },
-                    { "text": "सप्तपदी — सात फेरे, सात वचन, एक जीवन, एक साथ। ईश्वर की कृपा से बंधे दो आत्माएँ।", "reference": "— Saptapadi, The Seven Sacred Vows" }
-                ],
-                story: {
-                    title: "Love Story",
-                    button: "See Our Story",
-                    video_url: formData.get('story_video_url'),
-                    items: []
-                },
-                event: {
-                    title: "Happy Moments",
-                    info: "Requesting the divine blessings and grace of the Almighty Creator, we joyfully invite you to celebrate our union:",
-                    display_date: formData.get('home_date'),
-                    target_date: formData.get('event_target_date'),
-                    solemnization: { title: "Solemnization", time: formData.get('event_solemnization_time') },
-                    reception: { title: "Reception", time: formData.get('event_reception_time') },
-                    dress_code: { info: "Dress code info...", type: "Batik attire and shoes." },
-                    location: { address: formData.get('event_location_address'), maps_url: formData.get('event_location_maps_url') }
-                },
-                gallery: {
-                    title: "Gallery",
-                    images: JSON.parse(formData.get('gallery_images') || "[]")
-                },
-                celebration: {
-                    title: formData.get('celebration_title'),
-                    items: JSON.parse(formData.get('celebration_items') || "[]")
-                },
-                footer: {
-                    thanks: "ॐ शान्तिः शान्तिः शान्तिः",
-                    closing: formData.get('footer_closing')
-                },
-                welcome: { title: "The Wedding Of", button: "Open Invitation" },
-                audio_url: formData.get('audio_url'),
-                effects: {
-                    enabled: form.effects_enabled.checked,
-                    type: formData.get('effects_type'),
-                    density: 1000
-                },
-                rsvp: {
-                    adults: parseInt(formData.get('rsvp_adults')),
-                    children: parseInt(formData.get('rsvp_children')),
-                    total: parseInt(formData.get('rsvp_adults')) + parseInt(formData.get('rsvp_children'))
-                }
-            };
+                };
 
-            for(let i=0; i < form.story_count; i++) {
-                data.story.items.push({
-                    title: formData.get(`story_title_${i}`),
-                    content: formData.get(`story_content_${i}`)
-                });
+                for (let i = 0; i < (form.story_count || 0); i++) {
+                    config.story.items.push({
+                        title: form[`story_title_${i}`].value,
+                        content: form[`story_content_${i}`].value
+                    });
+                }
+
+                for (let i = 0; i < (form.celeb_count || 0); i++) {
+                    config.celebration.items.push({
+                        title: form[`celeb_title_${i}`].value,
+                        icon: form[`celeb_icon_${i}`].value,
+                        description: form[`celeb_desc_${i}`].value,
+                        show_input: form[`celeb_input_${i}`].checked,
+                        input_placeholder: form[`celeb_placeholder_${i}`].value
+                    });
+                }
+
+                for (let i = 0; i < (form.travel_count || 0); i++) {
+                    config.celebration.travel_locations.push({
+                        name: form[`travel_name_${i}`].value,
+                        image: form[`travel_img_${i}`].value,
+                        maps_url: form[`travel_link_${i}`].value
+                    });
+                }
+
+                return config;
+            } catch (e) {
+                console.error('Collect Data Failed:', e);
+                alert('Failed to collect data. Please check your inputs (especially JSON arrays).');
             }
-            return data;
         }
+
+        // Add dynamic item listeners
+        document.getElementById('add-celebration-item').onclick = () => {
+            const index = form.celeb_count++;
+            const container = document.getElementById('celebration-items-container');
+            const row = document.createElement('div');
+            row.className = 'mb-3 p-3 bg-light rounded-4 shadow-sm';
+            row.innerHTML = `
+                <div class="row g-2">
+                    <div class="col-md-4"><label class="small fw-bold">Title</label><input type="text" class="form-control form-control-sm" name="celeb_title_${index}"></div>
+                    <div class="col-md-3"><label class="small fw-bold">Icon</label><input type="text" class="form-control form-control-sm" name="celeb_icon_${index}" value="fa-star"></div>
+                    <div class="col-md-5"><label class="small fw-bold">Description</label><input type="text" class="form-control form-control-sm" name="celeb_desc_${index}"></div>
+                </div>
+                <div class="mt-2 form-check form-switch small"><input class="form-check-input" type="checkbox" name="celeb_input_${index}"><label class="form-check-label">Show Input</label></div>
+                <input type="text" class="form-control form-control-sm mt-1" name="celeb_placeholder_${index}" placeholder="Input placeholder...">
+            `;
+            container.appendChild(row);
+        };
+
+        document.getElementById('add-travel-location').onclick = () => {
+            const index = form.travel_count++;
+            const container = document.getElementById('travel-locations-container');
+            const row = document.createElement('div');
+            row.className = 'mb-3 p-3 bg-light rounded-4 shadow-sm';
+            row.innerHTML = `
+                <div class="mb-2"><label class="small fw-bold">Name</label><input type="text" class="form-control form-control-sm" name="travel_name_${index}"></div>
+                <div class="row g-2">
+                    <div class="col-md-6"><label class="small fw-bold">Image Path</label><input type="text" class="form-control form-control-sm" name="travel_img_${index}" placeholder="./assets/images/..."></div>
+                    <div class="col-md-6"><label class="small fw-bold">Maps URL</label><input type="text" class="form-control form-control-sm" name="travel_link_${index}" placeholder="https://goo.gl/maps/..."></div>
+                </div>
+            `;
+            container.appendChild(row);
+        };
 
         // Save for Preview (LocalStorage)
         document.getElementById('save-preview').onclick = () => {
@@ -532,8 +666,6 @@
             localStorage.setItem('github_repo', githubRepo);
             localStorage.setItem('github_branch', form.github_branch.value);
             localStorage.setItem('github_token', githubToken);
-
-            const githubBranch = form.github_branch.value || '4.x';
 
             const btn = document.getElementById('push-live');
             const originalText = btn.innerHTML;

@@ -7,21 +7,21 @@
     const updateText = (selector, content) => {
         const els = document.querySelectorAll(selector);
         els.forEach(el => {
-            if (el && content !== undefined) el.textContent = content;
+            if (el && content !== undefined) {el.textContent = content;}
         });
     };
 
     const updateHTML = (selector, content) => {
         const els = document.querySelectorAll(selector);
         els.forEach(el => {
-            if (el && content !== undefined) el.innerHTML = content;
+            if (el && content !== undefined) {el.innerHTML = content;}
         });
     };
 
     const updateAttr = (selector, attr, content) => {
         const els = document.querySelectorAll(selector);
         els.forEach(el => {
-            if (el && content !== undefined) el.setAttribute(attr, content);
+            if (el && content !== undefined) {el.setAttribute(attr, content);}
         });
     };
 
@@ -36,7 +36,7 @@
     };
 
     const applyConfig = (conf) => {
-        if (!conf) return;
+        if (!conf) {return;}
 
         // Meta Tags
         if (conf.meta) {
@@ -49,9 +49,11 @@
         // Welcome / Home
         if (conf.home) {
             updateText('.font-esthetic.pt-5', conf.home.title);
-            updateText('#home h2.font-esthetic', conf.home.couple);
+            updateText('#desktop-couple', conf.home.couple);
+            updateText('#mobile-couple', conf.home.couple);
             updateText('#welcome h2.font-esthetic:nth-child(3)', conf.home.couple || conf.home.title);
-            updateText('#home p.mb-0', conf.home.date);
+            updateText('#desktop-date', conf.home.date);
+            updateText('#mobile-date', conf.home.date);
             updateImage('.bg-cover-home', conf.home.bg_image);
             updateImage('#welcome img', conf.home.profile_image);
         }
@@ -68,24 +70,20 @@
             updateText('#bride p.pb-4', conf.invitation.intro);
 
             const groom = conf.invitation.groom;
-            const groomSection = document.querySelector('div[data-aos="fade-right"]');
-            if (groomSection && groom) {
-                updateText('div[data-aos="fade-right"] h2', groom.name);
-                const ps = groomSection.querySelectorAll('p');
-                if (ps[0]) ps[0].textContent = groom.designation;
-                if (ps[1]) ps[1].textContent = groom.father;
-                if (ps[3]) ps[3].textContent = groom.mother;
+            if (groom) {
+                updateText('#groom-name', groom.name);
+                updateText('#groom-designation', groom.designation);
+                updateText('#groom-father', groom.father);
+                updateText('#groom-mother', groom.mother);
                 updateImage('div[data-aos="fade-right"] img', groom.photo);
             }
 
             const bride = conf.invitation.bride;
-            const brideSection = document.querySelector('div[data-aos="fade-left"]');
-            if (brideSection && bride) {
-                updateText('div[data-aos="fade-left"] h2', bride.name);
-                const ps = brideSection.querySelectorAll('p');
-                if (ps[0]) ps[0].textContent = bride.designation;
-                if (ps[1]) ps[1].textContent = bride.father;
-                if (ps[3]) ps[3].textContent = bride.mother;
+            if (bride) {
+                updateText('#bride-name', bride.name);
+                updateText('#bride-designation', bride.designation);
+                updateText('#bride-father', bride.father);
+                updateText('#bride-mother', bride.mother);
                 updateImage('div[data-aos="fade-left"] img', bride.photo);
             }
         }
@@ -101,8 +99,8 @@
                 if (verseContainers[i]) {
                     const pText = verseContainers[i].querySelector('p:first-child');
                     const pRef = verseContainers[i].querySelector('p:last-child');
-                    if (pText) pText.textContent = v.text;
-                    if (pRef) pRef.textContent = v.reference;
+                    if (pText) {pText.textContent = v.text;}
+                    if (pRef) {pRef.textContent = v.reference;}
                 }
             });
         }
@@ -117,7 +115,7 @@
             updateText('#wedding-date small.d-block', conf.event.location.address);
             updateAttr('#wedding-date a[href*="goo.gl"]', 'href', conf.event.location.maps_url);
             
-            if (conf.event.target_date) document.body.setAttribute('data-time', conf.event.target_date);
+            if (conf.event.target_date) {document.body.setAttribute('data-time', conf.event.target_date);}
         }
 
         // Story
@@ -130,8 +128,8 @@
                 if (storyRows[i]) {
                     const title = storyRows[i].querySelector('.fw-bold');
                     const content = storyRows[i].querySelector('.small');
-                    if (title) title.textContent = item.title;
-                    if (content) content.textContent = item.content;
+                    if (title) {title.textContent = item.title;}
+                    if (content) {content.textContent = item.content;}
                 }
             });
         }
@@ -147,35 +145,91 @@
             });
         }
 
-        // Celebration
+        // Celebration & Travel
         if (conf.celebration) {
-            updateText('#celebration h2.font-esthetic', conf.celebration.title);
-            const items = document.querySelectorAll('#celebration .celebration-item');
-            if (conf.celebration.items) {
-                conf.celebration.items.forEach((item, i) => {
-                    if (items[i]) {
-                        const icon = items[i].querySelector('i');
-                        const title = items[i].querySelector('p:first-of-type');
-                        const desc = items[i].querySelector('p:last-of-type');
-                        
-                        if (icon && item.icon) {
-                            icon.className = `fa-solid ${item.icon} fa-lg me-3 text-secondary`;
-                        }
-                        if (title) title.textContent = item.title;
-                        if (desc) desc.textContent = item.description;
+            updateText('#celebration h2', conf.celebration.title);
+            updateText('#travel-title', conf.celebration.travel_title || 'Traveling from afar?');
+            
+            const container = document.getElementById('celebration-container');
+            if (container && conf.celebration.items) {
+                container.innerHTML = '';
+                conf.celebration.items.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'celebration-item bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start';
+                    itemDiv.setAttribute('data-aos', 'fade-up');
+                    itemDiv.setAttribute('data-aos-duration', '2500');
+                    
+                    let html = `
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid ${item.icon} fa-lg me-3 text-secondary"></i>
+                            <p class="m-0">${item.title}</p>
+                        </div>
+                        <p class="mb-0 text-secondary" style="font-size: 0.95rem;">${item.description}</p>
+                    `;
+                    
+                    if (item.show_input) {
+                        html += `
+                            <div class="celebration-input-container mt-3">
+                                <input type="text" class="form-control rounded-pill suggestion-input" 
+                                       placeholder="${item.input_placeholder || 'Type here...'}"
+                                       data-card="${item.title}">
+                            </div>
+                        `;
                     }
+                    
+                    itemDiv.innerHTML = html;
+                    container.appendChild(itemDiv);
+                });
+
+                // Add event listeners to sync with wishes section
+                const msgField = document.getElementById('form-comment');
+                document.querySelectorAll('.suggestion-input').forEach(input => {
+                    input.addEventListener('input', (e) => {
+                        if (!msgField) {return;}
+                        const cardTitle = e.target.getAttribute('data-card');
+                        const val = e.target.value;
+                        const marker = `[${cardTitle}]`;
+                        const currentMsg = msgField.value;
+                        
+                        // Simple logic to inject/update the suggestion in the message
+                        if (currentMsg.includes(marker)) {
+                            const regex = new RegExp(`\\${marker}.*?(\\n|$)`, 'g');
+                            msgField.value = currentMsg.replace(regex, `${marker} ${val}\n`);
+                        } else {
+                            msgField.value = (currentMsg ? currentMsg + '\n' : '') + `${marker} ${val}`;
+                        }
+                    });
                 });
             }
-        }
 
-        // Footer
+            const travelGrid = document.getElementById('travel-grid');
+            if (travelGrid && conf.celebration.travel_locations) {
+                travelGrid.innerHTML = '';
+                conf.celebration.travel_locations.forEach(loc => {
+                    const locDiv = document.createElement('div');
+                    locDiv.className = 'location-card rounded-4 shadow bg-theme-auto';
+                    locDiv.setAttribute('data-aos', 'fade-up');
+                    locDiv.onclick = () => window.open(loc.maps_url, '_blank');
+                    
+                    locDiv.innerHTML = `
+                        <img src="./assets/images/placeholder.webp" data-src="${loc.image}" alt="${loc.name}" class="lazy-load">
+                        <div class="location-overlay">
+                            <i class="fa-solid fa-map-location-dot navigate-icon"></i>
+                            <span class="location-name">${loc.name}</span>
+                            <small class="mt-2 text-white-50"><i class="fa-solid fa-arrow-pointer me-1"></i>Click to Navigate</small>
+                        </div>
+                    `;
+                    travelGrid.appendChild(locDiv);
+                });
+            }
+        }// Footer
         if (conf.footer) {
             updateText('section.bg-white-black.py-2 p', conf.footer.thanks);
             updateText('section.bg-white-black.py-2 h2:first-of-type', conf.footer.closing);
         }
 
         // Audio
-        if (conf.audio_url) document.body.setAttribute('data-audio', conf.audio_url);
+        if (conf.audio_url) {document.body.setAttribute('data-audio', conf.audio_url);}
 
         // Effects (Particles)
         if (conf.effects) {
@@ -198,7 +252,7 @@
             }
 
             const response = await fetch('./config.json');
-            if (!response.ok) throw new Error('config.json not found');
+            if (!response.ok) {throw new Error('config.json not found');}
             const data = await response.json();
             applyConfig(data);
         } catch (error) {

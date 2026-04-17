@@ -1,0 +1,75 @@
+/* --- Celebration Suggestions & Travel Grid Styles --- */
+
+.celebration-input-container {
+    margin-top: 10px;
+}
+
+.celebration-input-container input {
+    border: 1px solid var(--theme-border);
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+    font-size: 0.85rem;
+    padding: 8px 12px;
+}
+
+/* Travel Grid */
+.travel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.location-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.location-card:hover {
+    transform: translateY(-5px);
+}
+
+.location-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.location-card:hover img {
+    filter: brightness(0.7);
+}
+
+.location-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: rgba(0,0,0,0.3);
+    color: white;
+}
+
+.location-card:hover .location-overlay {
+    opacity: 1;
+}
+
+.location-name {
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.navigate-icon {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
