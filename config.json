@@ -108,12 +108,6 @@
         "description": "We'd love to hear your advice for a happy marriage or your favorite memory of us.",
         "show_input": true,
         "input_placeholder": "Share your thoughts..."
-      },
-      {
-        "icon": "fa-map-location-dot",
-        "title": "Explore Nearby",
-        "description": "For our traveling guests, here are some of our favorite local spots to visit while you're in town.",
-        "show_input": false
       }
     ],
     "travel_locations": [
