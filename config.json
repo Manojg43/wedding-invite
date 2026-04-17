@@ -7,8 +7,8 @@
     "title": "Wedding Invitation",
     "couple": "Manojkumar & Sindhu",
     "date": "Wednesday, March 15, 2023",
-    "bg_image": "./assets/images/gallery/bg.webp",
-    "profile_image": "./assets/images/gallery/bg.webp"
+    "bg_image": "https://ik.imagekit.io/dn9axq7lh/WhatsApp%20Image%202026-04-17%20at%205.15.06%20PM.jpeg",
+    "profile_image": "https://ik.imagekit.io/dn9axq7lh/WhatsApp%20Image%202026-04-17%20at%205.15.06%20PM.jpeg"
   },
   "invitation": {
     "opening_line": "ॐ गम गणपतये नमः",
@@ -83,8 +83,8 @@
   "gallery": {
     "title": "Gallery",
     "images": [
-      "./assets/images/gallery/rings.png",
-      "./assets/images/gallery/decor.png",
+      "https://ik.imagekit.io/dn9axq7lh/WhatsApp%20Image%202026-04-17%20at%205.15.06%20PM.jpeg",
+      "https://ik.imagekit.io/dn9axq7lh/default-image.jpg?updatedAt=1776426192626",
       "https://picsum.photos/1280/720?random=3",
       "https://picsum.photos/1280/720?random=4",
       "https://picsum.photos/1280/720?random=5",
