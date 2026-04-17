@@ -5,10 +5,10 @@
   },
   "home": {
     "title": "Wedding Invitation",
-    "couple": "Wahyu & Riski",
+    "couple": "Manojkumar & SIndhu",
     "date": "Wednesday, March 15, 2023",
-    "bg_image": "./assets/images/gallery/bg.png",
-    "profile_image": "./assets/images/gallery/bg.png"
+    "bg_image": "./assets/images/gallery/bg.webp",
+    "profile_image": "./assets/images/gallery/bg.webp"
   },
   "invitation": {
     "opening_line": "ॐ गम गणपतये नमः",
@@ -40,7 +40,7 @@
     }
   ],
   "story": {
-    "title": "Our Love Story",
+    "title": "Love Story",
     "button": "See Our Story",
     "video_url": "./assets/video/265501_tiny.mp4",
     "items": [
@@ -59,25 +59,25 @@
     ]
   },
   "event": {
-    "title": "Shubh Vivah",
-    "info": "With the divine blessings of Lord Ganesh and Goddess Lakshmi, we warmly invite you to grace our auspicious occasion:",
+    "title": "Happy Moments",
+    "info": "Requesting the divine blessings and grace of the Almighty Creator, we joyfully invite you to celebrate our union:",
     "display_date": "Wednesday, March 15, 2023",
     "target_date": "2024-01-01 09:30:00",
     "solemnization": {
-       "title": "Vivah Ceremony",
-       "time": "10.00 AM - Finished"
+      "title": "Solemnization",
+      "time": "10.00 AM - Finished"
     },
     "reception": {
-       "title": "Reception",
-       "time": "01.00 PM - Finished"
+      "title": "Reception",
+      "time": "01.00 PM - Finished"
     },
     "dress_code": {
-       "info": "For our shared comfort, we kindly request your presence with the following dress code:",
-       "type": "Traditional or Ethnic attire."
+      "info": "Dress code info...",
+      "type": "Batik attire and shoes."
     },
     "location": {
-       "address": "RT 10 RW 02, Pajerukan Village, Kalibagor District, Banyumas Regency, Central Java 53191.",
-       "maps_url": "https://goo.gl/maps/ALZR6FJZU3kxVwN86"
+      "address": "RT 10 RW 02, Pajerukan Village, Kalibagor District, Banyumas Regency, Central Java 53191.",
+      "maps_url": "https://goo.gl/maps/ALZR6FJZU3kxVwN86"
     }
   },
   "gallery": {
@@ -112,7 +112,7 @@
     ]
   },
   "footer": {
-    "thanks": "Thank you for your love, blessings, and prayers. Your presence fills our hearts with joy.",
+    "thanks": "ॐ शान्तिः शान्तिः शान्तिः",
     "closing": "ॐ शान्तिः शान्तिः शान्तिः"
   },
   "welcome": {
