@@ -56,6 +56,7 @@
             updateText('#mobile-date', conf.home.date);
             updateImage('.bg-cover-home', conf.home.bg_image);
             updateImage('#welcome img', conf.home.profile_image);
+            updateImage('#home img.rounded-circle', conf.home.profile_image);
         }
 
         if (conf.welcome) {
