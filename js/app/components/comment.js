@@ -101,7 +101,7 @@ export const comment = (() => {
         const isCollapsed = anchor.getAttribute('data-show') === 'false';
 
         util.safeInnerHTML(content, util.convertMarkdownToHTML(util.escapeHtml(isCollapsed ? original : original.slice(0, card.maxCommentLength) + '...')));
-        anchor.innerText = isCollapsed ? 'Sebagian' : 'Selengkapnya';
+        anchor.innerText = isCollapsed ? 'Show Less' : 'Read More';
         anchor.setAttribute('data-show', isCollapsed ? 'true' : 'false');
     };
 

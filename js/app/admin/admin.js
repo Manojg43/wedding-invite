@@ -326,7 +326,9 @@ export const admin = (() => {
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
-        session.isValid() ? getUserStats() : auth.clearSession();
+        // session.isValid() ? getUserStats() : auth.clearSession();
+        getUserStats(); // Bypassed for standalone local management
+
     };
 
     /**

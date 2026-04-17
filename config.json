@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "Online Wedding Invitation",
+    "description": "Online Wedding Invitation"
+  },
+  "home": {
+    "title": "Wedding Invitation",
+    "couple": "Wahyu & Riski",
+    "date": "Wednesday, March 15, 2023",
+    "bg_image": "./assets/images/gallery/bg.png",
+    "profile_image": "./assets/images/gallery/bg.png"
+  },
+  "invitation": {
+    "opening_line": "ॐ गम गणपतये नमः",
+    "greetings": "शुभ विवाह",
+    "intro": "With the blessings of Lord Ganesh, we joyfully invite you to celebrate our wedding:",
+    "groom": {
+      "name": "Wahyu Siapa",
+      "designation": "1st Son of",
+      "father": "Bapak lorem ipsum",
+      "mother": "Ibu lorem ipsum",
+      "photo": "./assets/images/groom/groom.png"
+    },
+    "bride": {
+      "name": "Riski Siapa",
+      "designation": "2nd Daughter of",
+      "father": "Bapak lorem ipsum",
+      "mother": "Ibu lorem ipsum",
+      "photo": "./assets/images/bride/bride.png"
+    }
+  },
+  "verses": [
+    {
+      "text": "तुम्हारे बिना जीवन अधूरा है, जैसे बिना जल के कमल। अर्धनारीश्वर की तरह, हम एक हैं।",
+      "reference": "— Hindu Wedding Blessing"
+    },
+    {
+      "text": "सप्तपदी — सात फेरे, सात वचन, एक जीवन, एक साथ। ईश्वर की कृपा से बंधे दो आत्माएँ।",
+      "reference": "— Saptapadi, The Seven Sacred Vows"
+    }
+  ],
+  "story": {
+    "title": "Our Love Story",
+    "button": "See Our Story",
+    "video_url": "./assets/video/265501_tiny.mp4",
+    "items": [
+      {
+        "title": "💼 A Simple First Encounter",
+        "content": "In January 2025, Wahyu, a 28-year-old graphic designer, met Riski..."
+      },
+      {
+        "title": "💞 Seeds of Love through Trials",
+        "content": "By February 2025, their project faced a crisis..."
+      },
+      {
+        "title": "💍 Steps Toward God's Blessing",
+        "content": "The process proceeded with sincerity and family blessings..."
+      }
+    ]
+  },
+  "event": {
+    "title": "Shubh Vivah",
+    "info": "With the divine blessings of Lord Ganesh and Goddess Lakshmi, we warmly invite you to grace our auspicious occasion:",
+    "display_date": "Wednesday, March 15, 2023",
+    "target_date": "2024-01-01 09:30:00",
+    "solemnization": {
+       "title": "Vivah Ceremony",
+       "time": "10.00 AM - Finished"
+    },
+    "reception": {
+       "title": "Reception",
+       "time": "01.00 PM - Finished"
+    },
+    "dress_code": {
+       "info": "For our shared comfort, we kindly request your presence with the following dress code:",
+       "type": "Traditional or Ethnic attire."
+    },
+    "location": {
+       "address": "RT 10 RW 02, Pajerukan Village, Kalibagor District, Banyumas Regency, Central Java 53191.",
+       "maps_url": "https://goo.gl/maps/ALZR6FJZU3kxVwN86"
+    }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "images": [
+      "./assets/images/gallery/rings.png",
+      "./assets/images/gallery/decor.png",
+      "https://picsum.photos/1280/720?random=3",
+      "https://picsum.photos/1280/720?random=4",
+      "https://picsum.photos/1280/720?random=5",
+      "https://picsum.photos/1280/720?random=6"
+    ]
+  },
+  "celebration": {
+    "title": "Help us Celebrate",
+    "items": [
+      {
+        "icon": "fa-music",
+        "title": "Song Requests",
+        "description": "Give us your song recommendations for the reception! Mention them in the Wishes section below."
+      },
+      {
+        "icon": "fa-heart-pulse",
+        "title": "Share Advice & Memories",
+        "description": "We'd love to hear your advice for a happy marriage or your favorite memory of us."
+      },
+      {
+        "icon": "fa-map-location-dot",
+        "title": "Explore the City",
+        "description": "For our traveling guests, here are some of our favorite local spots to visit while you're in town."
+      }
+    ]
+  },
+  "footer": {
+    "thanks": "Thank you for your love, blessings, and prayers. Your presence fills our hearts with joy.",
+    "closing": "ॐ शान्तिः शान्तिः शान्तिः"
+  },
+  "welcome": {
+    "title": "The Wedding Of",
+    "button": "Open Invitation"
+  },
+  "audio_url": "./assets/music/pure-love-304010.mp3",
+  "effects": {
+    "enabled": true,
+    "type": "petal",
+    "density": 1000
+  },
+  "rsvp": {
+    "adults": 0,
+    "children": 0,
+    "total": 0
+  }
+}

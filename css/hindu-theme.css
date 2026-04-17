@@ -1,0 +1,281 @@
+/* =====================================================
+   Hindu Wedding - Dynamic Theme (Warm White & Light Blue)
+   Provides two themes using the data-bs-theme attribute.
+   ===================================================== */
+
+/* --- Google Font: Playfair Display --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Josefin+Sans&family=Sacramento&display=swap');
+
+/* --- Force color-scheme to light only to prevent native dark scrollbars --- */
+html {
+    color-scheme: light only !important;
+}
+
+/* =========================================
+   THEME VARIABLES
+   ========================================= */
+
+/* DEFAULT: Warm White (mapped to "light") */
+html[data-bs-theme="light"] {
+    --theme-bg: #FFF8EE;
+    --theme-bg-alt: #FFF1DC;
+    --theme-accent: #C9973D;
+    --theme-accent-light: #E8C47A;
+    --theme-accent-dark: #9A6F1E;
+    --theme-text: #3D2B1F;
+    --theme-text-soft: #7A5C42;
+    --theme-border: rgba(201, 151, 61, 0.25);
+    --theme-shadow: rgba(180, 120, 30, 0.12);
+    --theme-nav: rgba(255, 248, 238, 0.9);
+    --theme-panel: #FFFAF2;
+    --theme-mandala: '%23C9973D';
+    /* URL encoded for SVG */
+    --theme-heart: rgba(201, 151, 61, 0.5);
+    --theme-petal: rgba(255, 228, 181, 0.85);
+    --theme-icon: '\f185';
+    /* Sun */
+}
+
+/* ALTERNATE: Light Sky Blue (mapped to "dark") */
+html[data-bs-theme="dark"] {
+    --theme-bg: #F2FaFF;
+    --theme-bg-alt: #E1F0FA;
+    --theme-accent: #4A90E2;
+    --theme-accent-light: #89B9EC;
+    --theme-accent-dark: #2C5D9F;
+    --theme-text: #1E2C3A;
+    --theme-text-soft: #34495E;
+    --theme-border: rgba(74, 144, 226, 0.25);
+    --theme-shadow: rgba(44, 93, 159, 0.12);
+    --theme-nav: rgba(242, 250, 255, 0.9);
+    --theme-panel: #F8xFCFF;
+    /* Slight tint panel */
+    --theme-mandala: '%234A90E2';
+    --theme-heart: rgba(74, 144, 226, 0.4);
+    --theme-petal: rgba(225, 240, 250, 0.85);
+    --theme-icon: '\f186';
+    /* Moon/Crescent metaphor */
+}
+
+html[data-bs-theme="dark"] {
+    --theme-panel: #F7FCFF;
+}
+
+
+/* =========================================
+   BOOTSTRAP OVERRIDES
+   ========================================= */
+
+html,
+body {
+    background-color: var(--theme-bg) !important;
+    color: var(--theme-text) !important;
+}
+
+html[data-bs-theme="light"],
+html[data-bs-theme="dark"] {
+    --bs-body-bg: var(--theme-bg) !important;
+    --bs-body-color: var(--theme-text) !important;
+    --bs-light: var(--theme-bg) !important;
+    --bs-dark: var(--theme-text) !important;
+}
+
+/* Section Backgrounds */
+html[data-bs-theme="light"] .bg-light-dark,
+html[data-bs-theme="dark"] .bg-light-dark,
+.bg-light-dark {
+    background-color: var(--theme-bg-alt) !important;
+}
+
+html[data-bs-theme="light"] .bg-white-black,
+html[data-bs-theme="dark"] .bg-white-black,
+.bg-white-black {
+    background-color: var(--theme-bg) !important;
+}
+
+html[data-bs-theme="light"] .bg-theme-auto,
+html[data-bs-theme="dark"] .bg-theme-auto,
+.bg-theme-auto {
+    background-color: var(--theme-panel) !important;
+    border: 1px solid var(--theme-border) !important;
+}
+
+/* Navbar */
+html[data-bs-theme="light"] .navbar,
+html[data-bs-theme="dark"] .navbar,
+.navbar {
+    background-color: var(--theme-nav) !important;
+    backdrop-filter: blur(0.5rem);
+    border-bottom: 1px solid var(--theme-border) !important;
+}
+
+/* SVG Wave Dividers */
+html[data-bs-theme="light"] .color-theme-svg,
+html[data-bs-theme="dark"] .color-theme-svg,
+.color-theme-svg {
+    color: var(--theme-bg) !important;
+    background-color: var(--theme-bg-alt) !important;
+}
+
+/* Typography */
+html[data-bs-theme="light"] .text-theme-auto,
+html[data-bs-theme="dark"] .text-theme-auto,
+.text-theme-auto {
+    color: var(--theme-text-soft) !important;
+}
+
+.font-esthetic {
+    color: var(--theme-accent-dark) !important;
+    text-shadow: 0 1px 2px var(--theme-shadow);
+}
+
+.font-arabic {
+    color: var(--theme-accent-dark) !important;
+}
+
+/* Shadows & Borders */
+.shadow,
+.shadow-sm {
+    box-shadow: 0 4px 20px var(--theme-shadow) !important;
+}
+
+.rounded-4,
+.rounded-5 {
+    border-color: var(--theme-border) !important;
+}
+
+/* Buttons Primary */
+.btn-primary {
+    background-color: var(--theme-accent) !important;
+    border-color: var(--theme-accent-dark) !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--theme-accent-dark) !important;
+    border-color: var(--theme-accent-dark) !important;
+}
+
+/* Outline buttons */
+html[data-bs-theme="light"] .btn-outline-auto,
+html[data-bs-theme="dark"] .btn-outline-auto {
+    --bs-btn-color: var(--theme-accent-dark) !important;
+    --bs-btn-border-color: var(--theme-accent) !important;
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: var(--theme-accent) !important;
+    --bs-btn-hover-border-color: var(--theme-accent-dark) !important;
+    --bs-btn-active-color: #fff !important;
+    --bs-btn-active-bg: var(--theme-accent-dark) !important;
+    --bs-btn-active-border-color: var(--theme-accent-dark) !important;
+}
+
+/* Nav Links */
+html[data-bs-theme="light"] .nav-link,
+html[data-bs-theme="dark"] .nav-link {
+    color: var(--theme-text-soft) !important;
+}
+
+html[data-bs-theme="light"] .nav-link.active,
+html[data-bs-theme="dark"] .nav-link.active {
+    color: var(--theme-accent-dark) !important;
+}
+
+/* HR dividers */
+hr {
+    border-color: var(--theme-border) !important;
+    opacity: 1 !important;
+}
+
+/* Particles */
+.particle-heart {
+    background-color: var(--theme-heart) !important;
+}
+
+.particle-petal {
+    background-color: var(--theme-petal) !important;
+    box-shadow: 0 0 5px var(--theme-border) !important;
+}
+
+/* Mandala Background Pattern */
+.bg-light-dark {
+    position: relative;
+    z-index: 1;
+}
+
+.bg-light-dark::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='var(--theme-mandala)' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='var(--theme-mandala)' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='var(--theme-mandala)' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='100' cy='100' r='30' fill='none' stroke='var(--theme-mandala)' stroke-width='0.5' opacity='0.15'/%3E%3Cline x1='10' y1='100' x2='190' y2='100' stroke='var(--theme-mandala)' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='100' y1='10' x2='100' y2='190' stroke='var(--theme-mandala)' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='27' y1='27' x2='173' y2='173' stroke='var(--theme-mandala)' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='173' y1='27' x2='27' y2='173' stroke='var(--theme-mandala)' stroke-width='0.4' opacity='0.12'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Due to CSS variable limitations in SVG backgrounds, we inject the colored SVG via pseudo-class per theme */
+html[data-bs-theme="light"] .bg-light-dark::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='%23C9973D' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='%23C9973D' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='%23C9973D' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='100' cy='100' r='30' fill='none' stroke='%23C9973D' stroke-width='0.5' opacity='0.15'/%3E%3Cline x1='10' y1='100' x2='190' y2='100' stroke='%23C9973D' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='100' y1='10' x2='100' y2='190' stroke='%23C9973D' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='27' y1='27' x2='173' y2='173' stroke='%23C9973D' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='173' y1='27' x2='27' y2='173' stroke='%23C9973D' stroke-width='0.4' opacity='0.12'/%3E%3C/svg%3E");
+}
+
+html[data-bs-theme="dark"] .bg-light-dark::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='%234A90E2' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='%234A90E2' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='%234A90E2' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='100' cy='100' r='30' fill='none' stroke='%234A90E2' stroke-width='0.5' opacity='0.15'/%3E%3Cline x1='10' y1='100' x2='190' y2='100' stroke='%234A90E2' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='100' y1='10' x2='100' y2='190' stroke='%234A90E2' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='27' y1='27' x2='173' y2='173' stroke='%234A90E2' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='173' y1='27' x2='27' y2='173' stroke='%234A90E2' stroke-width='0.4' opacity='0.12'/%3E%3C/svg%3E");
+}
+
+/* Image styling */
+.img-center-crop {
+    border-color: var(--theme-accent) !important;
+    box-shadow: 0 0 0 4px var(--theme-border) !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--theme-accent) !important;
+}
+
+/* Forms */
+.form-control,
+.form-select {
+    background-color: var(--theme-panel) !important;
+    border-color: var(--theme-border) !important;
+    color: var(--theme-text) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--theme-accent) !important;
+    box-shadow: 0 0 0 0.2rem var(--theme-border) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--theme-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--theme-accent-light);
+    border-radius: 4px;
+}
+
+/* Dynamic theme button icon */
+.btn-theme-icon::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+}
+
+html[data-bs-theme="light"] .btn-theme-icon::before {
+    content: '\f186';
+    /* Moon to switch to 'dark' */
+}
+
+html[data-bs-theme="dark"] .btn-theme-icon::before {
+    content: '\f185';
+    /* Sun to switch to 'light' */
+}
