@@ -35,6 +35,13 @@
         });
     };
 
+    const updateStyle = (selector, property, value) => {
+        const els = document.querySelectorAll(selector);
+        els.forEach(el => {
+            if (el && value !== undefined) el.style[property] = value;
+        });
+    };
+
     const applyConfig = (conf) => {
         if (!conf) return;
 
@@ -50,9 +57,9 @@
         if (conf.home) {
             updateText('.font-esthetic.pt-5', conf.home.title);
             updateText('#home h2.font-esthetic', conf.home.couple);
-            updateText('#welcome h2.font-esthetic:nth-child(3)', conf.home.couple);
-            updateText('#home p.my-2', conf.home.date);
-            updateImage('#home img', conf.home.bg_image);
+            updateText('#welcome h2.font-esthetic:nth-child(3)', conf.home.couple || conf.home.title);
+            updateText('#home p.mb-0', conf.home.date);
+            updateStyle('#home', 'backgroundImage', `url('${conf.home.bg_image}')`);
             updateImage('#welcome img', conf.home.profile_image);
         }
 
