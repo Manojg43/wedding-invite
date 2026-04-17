@@ -52,6 +52,9 @@
                 <button class="btn btn-secondary rounded-4 shadow-sm ms-2" onclick="window.open('index.html', '_blank')">
                     <i class="fa-solid fa-eye me-2"></i>Preview
                 </button>
+                <button class="btn btn-danger rounded-4 shadow-sm ms-2" id="push-live">
+                    <i class="fa-solid fa-cloud-arrow-up me-2"></i>Push to Live Site
+                </button>
                 <button class="btn btn-outline-danger btn-sm rounded-4 ms-2" id="clear-preview" title="Reset to original config.json">
                     <i class="fa-solid fa-rotate-left"></i>
                 </button>
@@ -69,6 +72,7 @@
                     <button class="list-group-item list-group-item-action p-3 fw-semibold" data-bs-toggle="list" data-bs-target="#tab-story" type="button" role="tab"><i class="fa-solid fa-book-open me-2 text-info"></i>Love Story</button>
                     <button class="list-group-item list-group-item-action p-3 fw-semibold" data-bs-toggle="list" data-bs-target="#tab-media" type="button" role="tab"><i class="fa-solid fa-images me-2 text-success"></i>Media & Gallery</button>
                     <button class="list-group-item list-group-item-action p-3 fw-semibold" data-bs-toggle="list" data-bs-target="#tab-celebration" type="button" role="tab"><i class="fa-solid fa-cake-candles me-2 text-secondary"></i>Help us Celebrate</button>
+                    <button class="list-group-item list-group-item-action p-3 fw-semibold text-danger" data-bs-toggle="list" data-bs-target="#tab-cloud" type="button" role="tab"><i class="fa-solid fa-cloud me-2"></i>Cloud Sync Settings</button>
                 </div>
             </div>
 
@@ -262,6 +266,39 @@
                             <div class="form-text mt-2 small">Configure the icon, title, and description for each card in the celebration section.</div>
                         </div>
 
+                        <!-- Tab: Cloud Sync -->
+                        <div class="tab-pane fade" id="tab-cloud" role="tabpanel">
+                            <h5 class="fw-bold mb-4 border-bottom pb-2">Vercel & GitHub Cloud Sync</h5>
+                            <div class="alert alert-info rounded-4 small">
+                                <i class="fa-solid fa-circle-info me-2"></i>Connect your GitHub account to save changes directly to your live website.
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small">GitHub Username</label>
+                                <input type="text" class="form-control rounded-3" name="github_user" placeholder="Manojg43">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small">Repository Name</label>
+                                <input type="text" class="form-control rounded-3" name="github_repo" value="wedding-invite">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small">GitHub Personal Access Token (PAT)</label>
+                                <input type="password" class="form-control rounded-3 font-monospace" name="github_token" placeholder="ghp_xxxxxxxxxxxx">
+                                <div class="form-text small mt-2">
+                                    Your token is stored <b>locally in your browser</b> and never sent to Vercel. 
+                                    <a href="https://github.com/settings/tokens/new" target="_blank" class="text-decoration-none ms-1">Create a token <i class="fa-solid fa-external-link small"></i></a>
+                                </div>
+                            </div>
+                            <div class="p-3 border rounded-4 bg-light mt-4">
+                                <h6 class="fw-bold small mb-2">How it works:</h6>
+                                <ol class="small mb-0">
+                                    <li>Enter your GitHub details above.</li>
+                                    <li>Click "Push to Live Site" in the top bar.</li>
+                                    <li>The dashboard will update your <code>config.json</code> on GitHub.</li>
+                                    <li>Vercel detects the change and rebuilds your site automatically!</li>
+                                </ol>
+                            </div>
+                        </div>
+
                     </div>
                 </form>
             </div>
@@ -343,6 +380,11 @@
                     storyContainer.appendChild(div);
                 });
                 form.story_count = data.story.items.length;
+
+                // Cloud Sync Fields
+                form.github_user.value = localStorage.getItem('github_user') || 'Manojg43';
+                form.github_repo.value = localStorage.getItem('github_repo') || 'wedding-invite';
+                form.github_token.value = localStorage.getItem('github_token') || '';
 
             } catch (e) {
                 console.error('Failed to load config:', e);
@@ -464,6 +506,83 @@
 
             alert('New config.json downloaded! Please replace the existing one in your project folder.');
         };
+
+        // Cloud Sync Logic
+        async function pushToLive() {
+            const data = collectData();
+            const githubUser = form.github_user.value;
+            const githubRepo = form.github_repo.value;
+            const githubToken = form.github_token.value;
+
+            if (!githubUser || !githubRepo || !githubToken) {
+                alert('Please configure your GitHub Cloud Sync settings first!');
+                bootstrap.Tab.getInstance(document.querySelector('[data-bs-target="#tab-cloud"]')).show();
+                return;
+            }
+
+            // Save settings locally
+            localStorage.setItem('github_user', githubUser);
+            localStorage.setItem('github_repo', githubRepo);
+            localStorage.setItem('github_token', githubToken);
+
+            const btn = document.getElementById('push-live');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Connecting...';
+            btn.disabled = true;
+
+            try {
+                const path = 'config.json';
+                const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${path}`;
+                
+                // 1. Get the current file version (SHA)
+                const getRes = await fetch(apiUrl, {
+                    headers: { 'Authorization': `token ${githubToken}` }
+                });
+                
+                if (!getRes.ok) throw new Error('Could not find config.json on GitHub. Check your repo settings.');
+                const fileData = await getRes.json();
+                const sha = fileData.sha;
+
+                // 2. Commit the new version
+                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up fa-bounce me-2"></i>Uploading...';
+                
+                const commitRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Update config.json via Live Dashboard',
+                        content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
+                        sha: sha
+                    })
+                });
+
+                if (!commitRes.ok) {
+                    const error = await commitRes.json();
+                    throw new Error(error.message || 'Failed to update GitHub');
+                }
+
+                btn.innerHTML = '<i class="fa-solid fa-check-circle me-2"></i>Pushed Successfully!';
+                btn.classList.replace('btn-danger', 'btn-success');
+                alert('Success! Your website is now rebuilding on Vercel. Changes will be live in ~60 seconds.');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.replace('btn-success', 'btn-danger');
+                    btn.disabled = false;
+                }, 3000);
+
+            } catch (error) {
+                console.error('GitHub Push Error:', error);
+                alert('Error: ' + error.message);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        document.getElementById('push-live').onclick = pushToLive;
 
         // Clear Preview
         document.getElementById('clear-preview').onclick = () => {
