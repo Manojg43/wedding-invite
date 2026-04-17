@@ -52,6 +52,7 @@
             updateText('#home h2.font-esthetic', conf.home.couple);
             updateText('#welcome h2.font-esthetic:nth-child(3)', conf.home.couple || conf.home.title);
             updateText('#home p.mb-0', conf.home.date);
+            updateImage('.bg-cover-home', conf.home.bg_image);
             updateImage('#welcome img', conf.home.profile_image);
         }
 
