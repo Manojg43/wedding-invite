@@ -516,12 +516,13 @@
         // Cloud Sync Logic
         async function pushToLive() {
             const data = collectData();
-            const githubUser = form.github_user.value;
-            const githubRepo = form.github_repo.value;
-            const githubToken = form.github_token.value;
+            const githubUser = form.github_user.value.trim();
+            const githubRepo = form.github_repo.value.trim();
+            const githubToken = form.github_token.value.trim();
+            const githubBranch = form.github_branch.value.trim() || '4.x';
 
             if (!githubUser || !githubRepo || !githubToken) {
-                alert('Please configure your GitHub Cloud Sync settings first!');
+                alert('Please configure your GitHub Cloud Sync settings correctly (Username, Repo, and Token required).');
                 bootstrap.Tab.getInstance(document.querySelector('[data-bs-target="#tab-cloud"]')).show();
                 return;
             }
@@ -548,7 +549,12 @@
                     headers: { 'Authorization': `token ${githubToken}` }
                 });
                 
-                if (!getRes.ok) throw new Error('Could not find config.json on GitHub. Check your repo settings.');
+                if (!getRes.ok) {
+                    const errData = await getRes.json().catch(() => ({}));
+                    if (getRes.status === 401) throw new Error('GitHub Token is invalid or expired. Please check your token settings.');
+                    if (getRes.status === 404) throw new Error(`Could not find folder/file at ${githubUser}/${githubRepo} on branch ${githubBranch}. Check your repo and branch names.`);
+                    throw new Error(`GitHub Error (${getRes.status}): ${errData.message || 'Unknown error'}`);
+                }
                 const fileData = await getRes.json();
                 const sha = fileData.sha;
 
