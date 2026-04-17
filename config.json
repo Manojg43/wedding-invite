@@ -15,18 +15,18 @@
     "greetings": "शुभ विवाह",
     "intro": "With the blessings of Lord Ganesh, we joyfully invite you to celebrate our wedding:",
     "groom": {
-      "name": "Wahyu Siapa",
-      "designation": "1st Son of",
-      "father": "Bapak lorem ipsum",
-      "mother": "Ibu lorem ipsum",
-      "photo": "./assets/images/groom/groom.png"
+      "name": "Manojkumar",
+      "designation": "",
+      "father": "Shrinivas",
+      "mother": "Sangeeta",
+      "photo": "https://cdn-vpos.vesatogo.in/vpos/uploads/prod/images/fb6dd1b3b3c24b38bb3b47004bc12a06.jpg"
     },
     "bride": {
-      "name": "Riski Siapa",
-      "designation": "2nd Daughter of",
-      "father": "Bapak lorem ipsum",
-      "mother": "Ibu lorem ipsum",
-      "photo": "./assets/images/bride/bride.png"
+      "name": "Sindhu",
+      "designation": "",
+      "father": "Rajniwas",
+      "mother": "Laxmi",
+      "photo": "https://cdn-vpos.vesatogo.in/vpos/uploads/prod/images/a7e92cea18454cab9a7f1d9dfcf5c7f4.jpg"
     }
   },
   "verses": [
@@ -83,8 +83,8 @@
   "gallery": {
     "title": "Gallery",
     "images": [
-      "./assets/images/gallery/rings.png",
-      "./assets/images/gallery/decor.png",
+      "https://cdn-vpos.vesatogo.in/vpos/uploads/prod/images/qc/b7fb39ab447e4dda88fa20003ca7a6d6.jpeg",
+      "https://cdn-vpos.vesatogo.in/vpos/uploads/prod/images/qc/29dd2eabff644048bc42d509fa440416.jpeg",
       "https://picsum.photos/1280/720?random=3",
       "https://picsum.photos/1280/720?random=4",
       "https://picsum.photos/1280/720?random=5",
