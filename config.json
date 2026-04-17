@@ -7,8 +7,8 @@
     "title": "Wedding Invitation",
     "couple": "Wahyu & Riski",
     "date": "Wednesday, March 15, 2023",
-    "bg_image": "./assets/images/gallery/bg.png",
-    "profile_image": "./assets/images/gallery/bg.png"
+    "bg_image": "./assets/images/gallery/bg.webp",
+    "profile_image": "./assets/images/gallery/bg.webp"
   },
   "invitation": {
     "opening_line": "ॐ गम गणपतये नमः",
