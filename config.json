@@ -97,14 +97,14 @@
     "items": [
       {
         "title": "Song Recommendations",
-        "title": "Song Recommendations",
+        "icon": "fa-music",
         "description": "Give us your song recommendations for the Haldi! We will play them during the ceremony.",
         "show_input": true,
         "input_placeholder": "Type song name..."
       },
       {
-        "icon": "fa-heart-pulse",
         "title": "Share Advice & Memories",
+        "icon": "fa-heart-pulse",
         "description": "We'd love to hear your advice for a happy marriage or your favorite memory of us.",
         "show_input": true,
         "input_placeholder": "Share your thoughts..."
