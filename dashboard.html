@@ -68,7 +68,7 @@
                     <button class="list-group-item list-group-item-action p-3 fw-semibold" data-bs-toggle="list" data-bs-target="#tab-event" type="button" role="tab"><i class="fa-solid fa-calendar-day me-2 text-warning"></i>Event Details</button>
                     <button class="list-group-item list-group-item-action p-3 fw-semibold" data-bs-toggle="list" data-bs-target="#tab-story" type="button" role="tab"><i class="fa-solid fa-book-open me-2 text-info"></i>Love Story</button>
                     <button class="list-group-item list-group-item-action p-3 fw-semibold" data-bs-toggle="list" data-bs-target="#tab-media" type="button" role="tab"><i class="fa-solid fa-images me-2 text-success"></i>Media & Gallery</button>
-                    <button class="list-group-item list-group-item-action p-3 fw-semibold" data-bs-toggle="list" data-bs-target="#tab-gift" type="button" role="tab"><i class="fa-solid fa-gift me-2 text-secondary"></i>Gifts & Banks</button>
+                    <button class="list-group-item list-group-item-action p-3 fw-semibold" data-bs-toggle="list" data-bs-target="#tab-celebration" type="button" role="tab"><i class="fa-solid fa-cake-candles me-2 text-secondary"></i>Help us Celebrate</button>
                 </div>
             </div>
 
@@ -81,9 +81,9 @@
                         <div class="tab-pane fade show active" id="tab-general" role="tabpanel">
                             <h5 class="fw-bold mb-4 border-bottom pb-2">General Settings</h5>
                             <div class="mb-3 text-center p-3 border rounded-4 bg-light">
-                                <label class="form-label fw-bold small d-block">Opening Verse / Bismillah</label>
-                                <input type="text" class="form-control rounded-3 text-center font-arabic" name="invitation_opening_line" style="font-size: 1.5rem;">
-                                <div class="form-text mt-2 small">This appears at the very top. You can replace the Arabic with Marathi or any other custom text.</div>
+                                <label class="form-label fw-bold small d-block">Opening Mantra (Ganesh Vandana)</label>
+                                <input type="text" class="form-control rounded-3 text-center" name="invitation_opening_line" style="font-size: 1.5rem;">
+                                <div class="form-text mt-2 small">This appears at the very top. You can replace the Sanskrit with Marathi or any other custom text.</div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold small">Website Title</label>
@@ -107,7 +107,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold small">Footer Closing Text (e.g. ॐ शान्तिः)</label>
-                                <input type="text" class="form-control rounded-3" name="footer_closing">
+                                <input type="text" class="form-control rounded-3" name="footer_closing" placeholder="ॐ शान्तिः शान्तिः शान्तिः">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold small">Background Music URL</label>
@@ -250,11 +250,16 @@
                             <div class="form-text mt-2 small">Enter image paths or URLs separated by new lines.</div>
                         </div>
 
-                        <!-- Tab: Gift -->
-                        <div class="tab-pane fade" id="tab-gift" role="tabpanel">
-                            <h5 class="fw-bold mb-4 border-bottom pb-2">Gifts & Accounts</h5>
-                            <h6 class="fw-bold small text-secondary">Accounts (JSON array format)</h6>
-                            <textarea class="form-control rounded-3 font-monospace small" name="gift_accounts" rows="8"></textarea>
+                        <!-- Tab: Celebration -->
+                        <div class="tab-pane fade" id="tab-celebration" role="tabpanel">
+                            <h5 class="fw-bold mb-4 border-bottom pb-2">Help us Celebrate Config</h5>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small">Section Title</label>
+                                <input type="text" class="form-control rounded-3" name="celebration_title" placeholder="Help us Celebrate">
+                            </div>
+                            <h6 class="fw-bold mt-4 small border-bottom pb-1 text-secondary text-uppercase">Celebration Cards (JSON array format)</h6>
+                            <textarea class="form-control rounded-3 font-monospace small" name="celebration_items" rows="12"></textarea>
+                            <div class="form-text mt-2 small">Configure the icon, title, and description for each card in the celebration section.</div>
                         </div>
 
                     </div>
@@ -321,7 +326,8 @@
                 form.story_video_url.value = data.story.video_url;
 
                 form.gallery_images.value = JSON.stringify(data.gallery.images, null, 2);
-                form.gift_accounts.value = JSON.stringify(data.gift.accounts, null, 2);
+                form.celebration_title.value = data.celebration?.title || 'Help us Celebrate';
+                form.celebration_items.value = JSON.stringify(data.celebration?.items || [], null, 2);
 
                 // Render story items
                 const storyContainer = document.getElementById('story-container');
@@ -375,8 +381,8 @@
                     }
                 },
                 verses: [
-                    { "text": "And of everything We have created pairs, that you may remember...", "reference": "QS. Adh-Dhariyat: 49" },
-                    { "text": "and indeed He created the pairs, the male and the female,", "reference": "QS. An-Najm: 45" }
+                    { "text": "तुम्हारे बिना जीवन अधूरा है, जैसे बिना जल के कमल। अर्धनारीश्वर की तरह, हम एक हैं।", "reference": "— Hindu Wedding Blessing" },
+                    { "text": "सप्तपदी — सात फेरे, सात वचन, एक जीवन, एक साथ। ईश्वर की कृपा से बंधे दो आत्माएँ।", "reference": "— Saptapadi, The Seven Sacred Vows" }
                 ],
                 story: {
                     title: "Love Story",
@@ -386,7 +392,7 @@
                 },
                 event: {
                     title: "Happy Moments",
-                    info: "Requesting the grace and pleasure of Allah Subhanahu Wa Ta'ala...",
+                    info: "Requesting the divine blessings and grace of the Almighty Creator, we joyfully invite you to celebrate our union:",
                     display_date: formData.get('home_date'),
                     target_date: formData.get('event_target_date'),
                     solemnization: { title: "Solemnization", time: formData.get('event_solemnization_time') },
@@ -398,13 +404,12 @@
                     title: "Gallery",
                     images: JSON.parse(formData.get('gallery_images') || "[]")
                 },
-                gift: {
-                    title: "Love Gift",
-                    info: "With respect...",
-                    accounts: JSON.parse(formData.get('gift_accounts') || "[]")
+                celebration: {
+                    title: formData.get('celebration_title'),
+                    items: JSON.parse(formData.get('celebration_items') || "[]")
                 },
                 footer: {
-                    thanks: "Thank you for your love, blessings, and prayers.",
+                    thanks: "ॐ शान्तिः शान्तिः शान्तिः",
                     closing: formData.get('footer_closing')
                 },
                 welcome: { title: "The Wedding Of", button: "Open Invitation" },
