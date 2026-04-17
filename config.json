@@ -5,7 +5,7 @@
   },
   "home": {
     "title": "Wedding Invitation",
-    "couple": "Manojkumar & SIndhu",
+    "couple": "Manojkumar & Sindhu",
     "date": "Wednesday, March 15, 2023",
     "bg_image": "./assets/images/gallery/bg.webp",
     "profile_image": "./assets/images/gallery/bg.webp"
@@ -15,18 +15,18 @@
     "greetings": "शुभ विवाह",
     "intro": "With the blessings of Lord Ganesh, we joyfully invite you to celebrate our wedding:",
     "groom": {
-      "name": "Manojkumar",
-      "designation": "",
-      "father": "Shrinivas",
-      "mother": "Sangeeta",
-      "photo": "https://cdn-vpos.vesatogo.in/vpos/uploads/prod/images/fb6dd1b3b3c24b38bb3b47004bc12a06.jpg"
+      "name": "Wahyu Siapa",
+      "designation": "1st Son of",
+      "father": "Bapak lorem ipsum",
+      "mother": "Ibu lorem ipsum",
+      "photo": "./assets/images/groom/groom.png"
     },
     "bride": {
-      "name": "Sindhu",
-      "designation": "",
-      "father": "Rajniwas",
-      "mother": "Laxmi",
-      "photo": "https://cdn-vpos.vesatogo.in/vpos/uploads/prod/images/a7e92cea18454cab9a7f1d9dfcf5c7f4.jpg"
+      "name": "Riski Siapa",
+      "designation": "2nd Daughter of",
+      "father": "Bapak lorem ipsum",
+      "mother": "Ibu lorem ipsum",
+      "photo": "./assets/images/bride/bride.png"
     }
   },
   "verses": [
@@ -40,7 +40,7 @@
     }
   ],
   "story": {
-    "title": "Love Story",
+    "title": "Our Love Story",
     "button": "See Our Story",
     "video_url": "./assets/video/265501_tiny.mp4",
     "items": [
@@ -59,8 +59,8 @@
     ]
   },
   "event": {
-    "title": "Happy Moments",
-    "info": "Requesting the divine blessings and grace of the Almighty Creator, we joyfully invite you to celebrate our union:",
+    "title": "Shubh Vivah",
+    "info": "With the divine blessings of Lord Ganesh and Goddess Lakshmi, we warmly invite you to grace our auspicious occasion:",
     "display_date": "Wednesday, March 15, 2023",
     "target_date": "2024-01-01 09:30:00",
     "solemnization": {
@@ -83,8 +83,8 @@
   "gallery": {
     "title": "Gallery",
     "images": [
-      "https://cdn-vpos.vesatogo.in/vpos/uploads/prod/images/qc/b7fb39ab447e4dda88fa20003ca7a6d6.jpeg",
-      "https://cdn-vpos.vesatogo.in/vpos/uploads/prod/images/qc/29dd2eabff644048bc42d509fa440416.jpeg",
+      "./assets/images/gallery/rings.png",
+      "./assets/images/gallery/decor.png",
       "https://picsum.photos/1280/720?random=3",
       "https://picsum.photos/1280/720?random=4",
       "https://picsum.photos/1280/720?random=5",
@@ -96,7 +96,7 @@
     "travel_title": "Traveling from afar?",
     "items": [
       {
-        "icon": "fa-music",
+        "title": "Song Recommendations",
         "title": "Song Recommendations",
         "description": "Give us your song recommendations for the Haldi! We will play them during the ceremony.",
         "show_input": true,
@@ -129,7 +129,7 @@
     ]
   },
   "footer": {
-    "thanks": "ॐ शान्तिः शान्तिः शान्तिः",
+    "thanks": "Thank you for your love, blessings, and prayers. Your presence fills our hearts with joy.",
     "closing": "ॐ शान्तिः शान्तिः शान्तिः"
   },
   "welcome": {
