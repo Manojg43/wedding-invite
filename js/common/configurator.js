@@ -110,8 +110,16 @@
         if (conf.event) {
             updateText('#wedding-date h2.font-esthetic', conf.event.title);
             updateText('#wedding-date p.py-2', conf.event.info);
-            updateText('#wedding-date div[data-aos="fade-right"] p', conf.event.solemnization.time);
-            updateText('#wedding-date div[data-aos="fade-left"] p', conf.event.reception.time);
+
+            if (conf.event.solemnization) {
+                updateText('#wedding-date div[data-aos="fade-right"] h2', conf.event.solemnization.title);
+                updateText('#wedding-date div[data-aos="fade-right"] p', conf.event.solemnization.time);
+            }
+
+            if (conf.event.reception) {
+                updateText('#wedding-date div[data-aos="fade-left"] h2', conf.event.reception.title);
+                updateText('#wedding-date div[data-aos="fade-left"] p', conf.event.reception.time);
+            }
             updateText('#wedding-date div[data-aos="fade-down"] p', conf.event.dress_code.type);
             updateText('#wedding-date small.d-block', conf.event.location.address);
             updateAttr('#wedding-date a[href*="goo.gl"]', 'href', conf.event.location.maps_url);

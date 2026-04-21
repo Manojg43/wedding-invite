@@ -246,24 +246,52 @@ export const guest = (() => {
      * @returns {void}
      */
     const buildGoogleCalendar = () => {
+        const conf = config.get();
+        if (!conf || !conf.invitation || !conf.event) {
+            console.warn('buildGoogleCalendar: Config not ready yet.');
+            return;
+        }
+
         /**
          * @param {string} d 
          * @returns {string}
          */
-        const formatDate = (d) => (new Date(d.replace(' ', 'T') + ':00Z')).toISOString().replace(/[-:]/g, '').split('.').shift();
+        const formatDate = (d) => {
+            const dateObj = new Date(d.replace(' ', 'T'));
+            if (isNaN(dateObj.getTime())) {
+                console.error('Invalid Date:', d);
+                return '';
+            }
+            return dateObj.toISOString().replace(/[-:]/g, '').split('.').shift();
+        };
+
+        const groom = conf.invitation.groom.name;
+        const bride = conf.invitation.bride.name;
+        const targetDate = conf.event.target_date;
+        const address = conf.event.location.address;
+
+        const startDate = new Date(targetDate.replace(' ', 'T'));
+        const endDate = new Date(startDate.getTime() + (2 * 60 * 60 * 1000)); // +2 hours
 
         const url = new URL('https://calendar.google.com/calendar/render');
         const data = new URLSearchParams({
             action: 'TEMPLATE',
-            text: 'The Wedding of Wahyu and Riski',
-            dates: `${formatDate('2023-03-15 10:00')}/${formatDate('2023-03-15 11:00')}`,
-            details: 'With all due respect, we invite you to attend our wedding. Thank you for your attention and prayers, which are a great happiness and honor for us.',
-            location: 'RT 10 RW 02, Pajerukan Village, Kalibagor District, Banyumas Regency, Central Java 53191.',
-            ctz: config.get('tz'),
+            text: `The Wedding of ${groom} & ${bride}`,
+            dates: `${formatDate(targetDate)}/${endDate.toISOString().replace(/[-:]/g, '').split('.').shift()}`,
+            details: `With the divine blessings of Lord Ganesh, we joyfully invite you to celebrate our union. Thank you for your love and prayers!`,
+            location: address,
+            ctz: conf.tz || 'Asia/Kolkata',
         });
 
         url.search = data.toString();
-        document.querySelector('#home button')?.addEventListener('click', () => window.open(url, '_blank'));
+        
+        const btn = document.querySelector('#home button');
+        if (btn) {
+            // Clean up existing listeners to avoid multiple popups
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+            newBtn.addEventListener('click', () => window.open(url, '_blank'));
+        }
     };
 
     /**
@@ -343,10 +371,23 @@ export const guest = (() => {
             document.getElementById('comment')?.remove();
             document.querySelector('a.nav-link[href="#comment"]')?.closest('li.nav-item')?.remove();
 
-            vid.load();
-            img.load();
-            aud.load();
-            lib.load({ confetti: document.body.getAttribute('data-confetti') === 'true' });
+            progress.add(); // Add progress for local config
+            fetch('./config.json')
+                .then(r => r.json())
+                .then(data => {
+                    for (const [k, v] of Object.entries(data)) {
+                        config.set(k, v);
+                    }
+                    progress.complete('config');
+                    vid.load();
+                    img.load();
+                    aud.load();
+                    lib.load({ confetti: document.body.getAttribute('data-confetti') === 'true' });
+                })
+                .catch(err => {
+                    console.error('Failed to load local config.json:', err);
+                    progress.invalid('config');
+                });
         }
 
         if (token && token.length > 0) {

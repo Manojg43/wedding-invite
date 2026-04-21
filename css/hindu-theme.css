@@ -133,6 +133,18 @@ html[data-bs-theme="dark"] .text-theme-auto,
     color: var(--theme-accent-dark) !important;
 }
 
+.font-marathi-stylish {
+    font-family: 'Yatra One', cursive;
+    background: linear-gradient(to right, #B8860B, #FFD700, #DBA520, #FFD700, #B8860B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    line-height: 1.4;
+    padding: 0.25rem 0;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.15));
+    font-weight: 400;
+}
+
 /* Shadows & Borders */
 .shadow,
 .shadow-sm {
@@ -279,4 +291,33 @@ html[data-bs-theme="light"] .btn-theme-icon::before {
 html[data-bs-theme="dark"] .btn-theme-icon::before {
     content: '\f185';
     /* Sun to switch to 'light' */
+}
+
+/* Swastik Icon Animation */
+.swastik-container {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    margin: 1rem 0;
+    animation: swastikPulse 4s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(139, 0, 0, 0.2));
+}
+
+.swastik-icon {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes swastikPulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+@media (max-width: 576px) {
+    .swastik-container {
+        width: 50px;
+        height: 50px;
+        margin: 0.5rem 0;
+    }
 }

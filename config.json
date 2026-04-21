@@ -6,26 +6,26 @@
   "home": {
     "title": "Wedding Invitation",
     "couple": "Manojkumar & Sindhu",
-    "date": "Wednesday, March 15, 2023",
+    "date": "Wednesday, May 13, 2026",
     "bg_image": "https://ik.imagekit.io/dn9axq7lh/WhatsApp%20Image%202026-04-17%20at%205.15.06%20PM.jpeg",
     "profile_image": "https://ik.imagekit.io/dn9axq7lh/WhatsApp%20Image%202026-04-17%20at%205.15.06%20PM.jpeg"
   },
   "invitation": {
-    "opening_line": "ॐ गम गणपतये नमः",
+    "opening_line": "||वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ||\n||निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा|| ",
     "greetings": "शुभ विवाह",
     "intro": "With the blessings of Lord Ganesh, we joyfully invite you to celebrate our wedding:",
     "groom": {
-      "name": "Wahyu Siapa",
-      "designation": "1st Son of",
-      "father": "Bapak lorem ipsum",
-      "mother": "Ibu lorem ipsum",
+      "name": "Manojkumar Gajul",
+      "designation": "Son of",
+      "father": "Shrinivas Mallayya Gajul",
+      "mother": "Sangeeta Shrinivas Gajul",
       "photo": "./assets/images/groom/groom.png"
     },
     "bride": {
-      "name": "Riski Siapa",
-      "designation": "2nd Daughter of",
-      "father": "Bapak lorem ipsum",
-      "mother": "Ibu lorem ipsum",
+      "name": "Sindhu Paskanti",
+      "designation": "Daughter of",
+      "father": "Rajniwas Shankar Paskanti",
+      "mother": "Laxmi Rajniwas Paskanti",
       "photo": "./assets/images/bride/bride.png"
     }
   },
@@ -61,23 +61,23 @@
   "event": {
     "title": "Shubh Vivah",
     "info": "With the divine blessings of Lord Ganesh and Goddess Lakshmi, we warmly invite you to grace our auspicious occasion:",
-    "display_date": "Wednesday, March 15, 2023",
-    "target_date": "2024-01-01 09:30:00",
+    "display_date": "Wednesday, May 13, 2026",
+    "target_date": "2026-05-13 06:45:00",
     "solemnization": {
       "title": "Vivah Ceremony",
-      "time": "10.00 AM - Finished"
+      "time": "06.45 PM"
     },
     "reception": {
-      "title": "Reception",
-      "time": "01.00 PM - Finished"
+      "title": "Sangeet & Haldi",
+      "time": "04.00 PM - 10.00 PM"
     },
     "dress_code": {
       "info": "For our shared comfort, we kindly request your presence with the following dress code:",
       "type": "Traditional or Ethnic attire."
     },
     "location": {
-      "address": "RT 10 RW 02, Pajerukan Village, Kalibagor District, Banyumas Regency, Central Java 53191.",
-      "maps_url": "https://goo.gl/maps/ALZR6FJZU3kxVwN86"
+      "address": "774/2 A Godutai Vidi Gharkul, Near Swami Samarth temple, Kumbhari, Solapur.",
+      "maps_url": "https://maps.app.goo.gl/ajasd6njgCRgWjTD7"
     }
   },
   "gallery": {
@@ -123,14 +123,14 @@
       },
       {
         "name": "Tulja Bhavani Temple, Tuljapur",
-        "image": "https://picsum.photos/800/600?random=10",
+        "image": "https://picsum.photos/1280/720?random=10",
         "maps_url": "https://goo.gl/maps/TuljapurLink"
       }
     ]
   },
   "footer": {
-    "thanks": "Thank you for your love, blessings, and prayers. Your presence fills our hearts with joy.",
-    "closing": "ॐ शान्तिः शान्तिः शान्तिः"
+    "thanks": "Thank you for your love, blessings, and prayers. Your presence fills our hearts with joy. ❤️🙏✨",
+    "closing": ""
   },
   "welcome": {
     "title": "The Wedding Of",
